@@ -1,0 +1,33 @@
+import json
+
+
+class CommentsDAO:
+    """
+    DAO для обработки данных из json файла с комментариями
+    """
+    def __init__(self, path: str):
+        if type(path) != str: raise TypeError("path должен быть str")
+        self.path = path  # путь до директории json файла
+
+    def load_comments(self):
+        """
+        Функция загрузки данных из comments.json
+        """
+        with open(self.path, 'r', encoding='UTF-8') as f:
+            data = json.load(f)
+        return data
+
+    def get_all_comments(self):
+        """
+        Получение листа со словарями всех комментариев
+        """
+        comments = self.load_comments()
+        return comments
+
+    def get_comments_by_post_id(self, post_id: int):
+        """
+        Функция получения листа с комментариями по post_id
+        """
+        if type(post_id) != int: raise TypeError("post_id должен быть int")
+        all_comments = self.load_comments()
+        return list(filter(lambda x: x['post_id'] == post_id, all_comments))
