@@ -1,14 +1,5 @@
 import pytest
 
-from app.main.dao.comments_dao import CommentsDAO
-
-
-@pytest.fixture()
-def comments_dao():
-    comments_dao_instance = CommentsDAO('data/comments.json')
-    return comments_dao_instance
-
-
 key_should_be = {'post_id', 'commenter_name', 'comment', 'pk'}
 
 
@@ -25,5 +16,3 @@ class TestCommentsDAO:
         comment = comments[0]
         assert comment['pk'] == 1, 'Возвращаются неправильно комментарии по номеру посту'
         assert set(comment.keys()) == key_should_be, "Неверный список ключей"
-
-

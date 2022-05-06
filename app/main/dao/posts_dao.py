@@ -9,7 +9,9 @@ class PostsDAO:
     DAO для обработки данных из json файла с постами
     """
     def __init__(self, path):
-        if type(path) != str: raise TypeError  # проверка на ввод правильного пути
+        """
+        :param path: путь до json файла
+        """
         self.path = path  # путь до директории до json файла с постами
 
     def load_post(self):
@@ -30,16 +32,18 @@ class PostsDAO:
     def get_posts_by_user(self, username: str):
         """
         Возвращает посты определенного пользователя
+        :param username: имя пользователя
+        :return: list
         """
-        if type(username) != str: raise TypeError("username должен быть str")
         all_post = self.load_post()
         return list(filter(lambda x: username.lower() == x['poster_name'].lower(), all_post))
 
     def search_for_posts(self, query: str):
         """
         Поиск постов по ключевому слову
+        :param query: слово
+        :return:
         """
-        if type(query) != str: raise TypeError('query должен быть str')
         all_post = self.load_post()
         return list(filter(lambda x: query.lower() in clear_punctuation(x['content']).lower().split(), all_post))
 
@@ -47,7 +51,6 @@ class PostsDAO:
         """
         Получение поста по ключу
         """
-        if type(pk) != int: raise TypeError('pk должен быть int')
         all_post = self.load_post()
         return next(filter(lambda x: pk == x['pk'], all_post))
 

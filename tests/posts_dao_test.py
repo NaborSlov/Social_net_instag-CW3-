@@ -1,14 +1,5 @@
 import pytest
 
-from app.main.dao.posts_dao import PostsDAO
-
-
-@pytest.fixture()
-def posts_dao():
-    posts_dao_instance = PostsDAO('data/posts.json')
-    return posts_dao_instance
-
-
 key_should_be = {'poster_name', 'poster_avatar', 'pic', 'content', 'views_count', 'likes_count', 'pk'}
 
 

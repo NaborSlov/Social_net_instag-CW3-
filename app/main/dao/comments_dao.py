@@ -6,7 +6,9 @@ class CommentsDAO:
     DAO для обработки данных из json файла с комментариями
     """
     def __init__(self, path: str):
-        if type(path) != str: raise TypeError("path должен быть str")
+        """
+        :param path: путь до json файла
+        """
         self.path = path  # путь до директории json файла
 
     def load_comments(self):
@@ -28,6 +30,6 @@ class CommentsDAO:
         """
         Функция получения листа с комментариями по post_id
         """
-        if type(post_id) != int: raise TypeError("post_id должен быть int")
         all_comments = self.load_comments()
         return list(filter(lambda x: x['post_id'] == post_id, all_comments))
+
