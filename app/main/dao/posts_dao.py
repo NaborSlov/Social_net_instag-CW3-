@@ -1,5 +1,6 @@
 import json
 
+from app.main.dao.comments_dao import CommentsDAO
 from functions import clear_punctuation
 
 
@@ -26,6 +27,14 @@ class PostsDAO:
         all_post = self.load_post()
         return all_post
 
+    def get_posts_by_user(self, username: str):
+        """
+        Возвращает посты определенного пользователя
+        """
+        if type(username) != str: raise TypeError("username должен быть str")
+        all_post = self.load_post()
+        return list(filter(lambda x: username.lower() == x['poster_name'].lower(), all_post))
+
     def search_for_posts(self, query: str):
         """
         Поиск постов по ключевому слову
@@ -41,3 +50,10 @@ class PostsDAO:
         if type(pk) != int: raise TypeError('pk должен быть int')
         all_post = self.load_post()
         return next(filter(lambda x: pk == x['pk'], all_post))
+
+    def get_post_by_tag(self, tag: str):
+        """
+        Получение постов по тегу
+        """
+        all_post = self.load_post()
+        return list(filter(lambda x: x['content'].count(f"#{tag}"), all_post))

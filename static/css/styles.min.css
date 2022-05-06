@@ -339,6 +339,14 @@ textarea {
 }
 
 .item__descr {
+	display: -webkit-box;
+	-webkit-line-clamp: 7;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	margin-bottom: 2px
+}
+
+.item__descr_comm{
 	margin-bottom: 2px
 }
 
